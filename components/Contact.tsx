@@ -63,24 +63,58 @@ export const Contact = () => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Simulate form submission
-    setTimeout(() => {
+    try {
+      const res = await fetch("/api/quote", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          firstName: formData.firstName,
+          lastName: formData.lastName,
+          email: formData.email,
+          phone: formData.phone,
+          address: formData.address,
+          zip: formData.zipCode, // backend expects `zip`
+          message: formData.message,
+        }),
+      });
+
+      const data = await res.json();
+
+      if (res.ok) {
+        toast({
+          title: "Request Submitted Successfully!",
+          description:
+            "We'll contact you within 24 hours with your free estimate.",
+        });
+
+        setFormData({
+          firstName: "",
+          lastName: "",
+          email: "",
+          phone: "",
+          address: "",
+          zipCode: "",
+          message: "",
+        });
+      } else {
+        toast({
+          title: "Error",
+          description: data.message || "Something went wrong. Please try again.",
+          variant: "destructive",
+        });
+      }
+    } catch (error) {
+      console.error("Form submit error:", error);
       toast({
-        title: "Request Submitted Successfully!",
-        description:
-          "We'll contact you within 24 hours with your free estimate.",
+        title: "Error",
+        description: "Failed to send your request. Please try again later.",
+        variant: "destructive",
       });
+    } finally {
       setIsSubmitting(false);
-      setFormData({
-        firstName: "",
-        lastName: "",
-        email: "",
-        phone: "",
-        address: "",
-        zipCode: "",
-        message: "",
-      });
-    }, 1000);
+    }
   };
 
   return (
@@ -88,16 +122,16 @@ export const Contact = () => {
       <div className="container mx-auto px-4">
         {/* Header */}
         <div className="text-center mb-16 animate-fade-in">
-          <div className="text-accent font-semibold text-sm tracking-wide uppercase mb-4">
+          <div className="text-accent font-semibold text-primaryBlack uppercase mb-4">
             Get Your Free Estimate
           </div>
-          <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
+          <h2 className="text-4xl md:text-5xl font-bold text-primaryBlack mb-6">
             Ready to Transform Your{" "}
-            <span className="bg-hero-gradient bg-clip-text text-transparent">
+            <span className="bg-hero-gradient bg-clip-text text-primaryBlack">
               Property?
             </span>
           </h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+          <p className="text-xl text-primaryBlack max-w-3xl mx-auto">
             Contact us today for a free, no-obligation estimate. Our experienced
             team is ready to help you find the perfect fencing solution.
           </p>
@@ -245,19 +279,19 @@ export const Contact = () => {
                   <Button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full bg-hero-gradient hover:shadow-accent text-lg py-6 smooth-transition"
+                    className="w-full bg-hero-gradient text-primaryBlack bg-primaryRed hover:bg-primaryRed  hover:shadow-accent text-lg py-6 smooth-transition"
                   >
                     {isSubmitting ? (
                       "Submitting..."
                     ) : (
                       <>
-                        <Send className="w-5 h-5 mr-2" />
+                        <Send className="w-5 h-5 mr-2 text-black" />
                         Request Free Estimate
                       </>
                     )}
                   </Button>
 
-                  <p className="text-sm text-muted-foreground text-center">
+                  <p className="text-sm text-primaryBlack text-center">
                     * Required fields. We respect your privacy and will never
                     share your information.
                   </p>
@@ -267,49 +301,51 @@ export const Contact = () => {
           </div>
 
           {/* Contact Information */}
-         <div className="space-y-6 animate-slide-in-right">
-  {contactInfo.map((info, index) => (
-    <Card
-      key={info.title}
-      className="soft-shadow border-0 hover:shadow-elegant smooth-transition animate-scale-in"
-      style={{ animationDelay: `${index * 0.1}s` }}
-    >
-      <CardContent className="p-6">
-        <div className="flex items-start space-x-4">
-          {/* Icon in red */}
-          <div className="p-3 rounded-lg flex-shrink-0">
-            <info.icon className="w-6 h-6 text-red-600" />
-          </div>
-          <div>
-            {/* Headline in black */}
-            <h3 className="font-semibold text-black mb-1">{info.title}</h3>
-            <p className="text-lg text-muted-foreground font-medium mb-1">
-              {info.details}
-            </p>
-            <p className="text-sm text-muted-foreground">{info.subtitle}</p>
-          </div>
-        </div>
-      </CardContent>
-    </Card>
-  ))}
+          <div className="space-y-6 animate-slide-in-right">
+            {contactInfo.map((info, index) => (
+              <Card
+                key={info.title}
+                className="soft-shadow border-0 hover:shadow-elegant smooth-transition animate-scale-in"
+                style={{ animationDelay: `${index * 0.1}s` }}
+              >
+                <CardContent className="p-6">
+                  <div className="flex items-start space-x-4">
+                    <div className="p-3 rounded-lg flex-shrink-0">
+                      <info.icon className="w-6 h-6 text-red-600" />
+                    </div>
+                    <div>
+                      <h3 className="font-semibold text-black mb-1">
+                        {info.title}
+                      </h3>
+                      <p className="text-lg text-muted-foreground font-medium mb-1">
+                        {info.details}
+                      </p>
+                      <p className="text-sm text-muted-foreground">
+                        {info.subtitle}
+                      </p>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
 
-  {/* Emergency Notice */}
-  <Card className="bg-accent/10 border border-accent/20 soft-shadow">
-    <CardContent className="p-6 text-center">
-      <h3 className="font-bold text-black mb-2">Emergency Repairs?</h3>
-      <p className="text-sm text-muted-foreground mb-4">
-        We offer 24/7 emergency fence repair services for urgent situations.
-      </p>
-      <Button
-        className="w-full bg-red-600 text-black hover:bg-red-700 hover:text-black border-red-600"
-        asChild
-      >
-        <a href="tel:8037697747">Call Now: (803) 769-7747</a>
-      </Button>
-    </CardContent>
-  </Card>
-</div>
-
+            {/* Emergency Notice */}
+            <Card className="bg-accent/10 border border-accent/20 soft-shadow">
+              <CardContent className="p-6 text-center">
+                <h3 className="font-bold text-black mb-2">Emergency Repairs?</h3>
+                <p className="text-sm text-muted-foreground mb-4">
+                  We offer 24/7 emergency fence repair services for urgent
+                  situations.
+                </p>
+                <Button
+                  className="w-full bg-red-600 text-black hover:bg-red-700 hover:text-black border-red-600"
+                  asChild
+                >
+                  <a href="tel:8037697747">Call Now: (803) 769-7747</a>
+                </Button>
+              </CardContent>
+            </Card>
+          </div>
         </div>
       </div>
     </section>

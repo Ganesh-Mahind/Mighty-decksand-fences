@@ -173,7 +173,7 @@ export const QuoteForm = () => {
           <div className="col-span-2">
             <Button
               type="submit"
-              className="w-full border-2 hover:bg-red-600 text-primaryBlack border-primaryBlack bg-primaryRed font-semibold py-3"
+              className="w-full border-2 hover:bg-blue text-primaryBlack border-primaryBlack bg-primaryBlue font-semibold py-3"
             >
               Request Estimate
             </Button>

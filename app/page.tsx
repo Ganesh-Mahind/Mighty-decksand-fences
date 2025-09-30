@@ -81,7 +81,7 @@ const Home = () => {
                         className="group-hover:bg-primaryRed group-hover:text-primaryBlack group-hover:border-primary smooth-transition"
                       >
                         Learn More
-                        <ArrowRight className="w-4 h-4 ml-2" />
+                        <ArrowRight className="w-4 h-4 ml-2 " />
                       </Button>
                     </Link>
                   </CardContent>

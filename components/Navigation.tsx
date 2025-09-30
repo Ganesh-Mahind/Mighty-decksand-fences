@@ -29,7 +29,7 @@ export const Navigation = () => {
               className={`smooth-transition ${
                 location === "/services"
                   ? "text-primary font-semibold"
-                  : "text-foreground hover:text-primary"
+                  : "text-primaryBlack hover:text-primaryBlack"
               }`}
             >
               Services
@@ -39,7 +39,7 @@ export const Navigation = () => {
               className={`smooth-transition ${
                 location === "/about"
                   ? "text-primary font-semibold"
-                  : "text-foreground hover:text-primary"
+                  : "text-primaryBlack hover:text-primaryBlack"
               }`}
             >
               About
@@ -49,7 +49,7 @@ export const Navigation = () => {
               className={`smooth-transition ${
                 location === "/contact"
                   ? "text-primary font-semibold"
-                  : "text-foreground hover:text-primary"
+                  : "text-primaryBlack hover:text-primaryBlack"
               }`}
             >
               Contact
@@ -68,7 +68,7 @@ export const Navigation = () => {
             <Link href="/contact">
               <Button
                 variant="default"
-                className="border-2 border-primaryBlack text-primaryBlack bg-primaryRed hover:bg-primaryRed hover:text-Black smooth-transition"
+                className="border-2 border-primaryBlack text-primaryBlack text-bold bg-primaryBlue hover:bg-primaryBlue hover:text-Black smooth-transition"
               >
                 Free Estimate
               </Button>

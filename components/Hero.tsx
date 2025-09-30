@@ -13,7 +13,7 @@ export const Hero = () => {
           <div className="space-y-8 animate-fade-in">
             <div className="space-y-4">
               <div className="flex items-center space-x-2 text-accent">
-                <Award className="w-5 h-5" />
+                <Award className="w-5 h-5 text-primaryYellow" />
                 <span className="font-semibold text-sm  font-boldtracking-wide uppercase text-primaryBlack">
                   Columbia's Premier Fence Company
                 </span>
@@ -21,7 +21,7 @@ export const Hero = () => {
 
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-primaryBlack leading-tight">
                 Professional{" "}
-                <span className="bg-hero-gradient bg-clip-text text-primaryBlue">
+                <span className="bg-hero-gradient bg-clip-text text-primaryRed">
                   Fence Installation
                 </span>{" "}
                 You Can Trust
@@ -38,15 +38,15 @@ export const Hero = () => {
             {/* Trust Indicators */}
             <div className="flex flex-wrap gap-6 text-sm">
               <div className="flex items-center font-bold text-primaryBlack">
-                <Shield className="w-4 h-4 mr-2 text-primary" />
+                <Shield className="w-4 h-4 mr-2 text-primaryYellow" />
                 Licensed & Insured
               </div>
               <div className="flex items-center font-bold text-primaryBlack">
-                <Users className="w-4 h-4 mr-2 text-primary" />
+                <Users className="w-4 h-4 mr-2 text-primaryYellow" />
                 500+ Happy Customers
               </div>
               <div className="flex items-center font-bold text-primaryBlack">
-                <Award className="w-4 h-4 mr-2 text-primary" />
+                <Award className="w-4 h-4 mr-2 text-primaryYellow" />
                 25+ Years Experience
               </div>
             </div>
@@ -56,7 +56,7 @@ export const Hero = () => {
               <Link href="/contact">
                 <Button
                   size="lg"
-                className="border-2 border-primary text-primaryBlack  hover:bg-primaryRed hover:text-black bg-primaryRed text-lg px-8 py-6"
+                className="border-2 border-primary text-primaryBlack  hover:bg-primaryBlue hover:text-black bg-primaryBlue text-lg text-bold px-8 py-6"
                 >
                   Get Free Estimate
                 </Button>
@@ -64,10 +64,10 @@ export const Hero = () => {
               <Button
                 variant="outline"
                 size="lg"
-                className="border-2 border-primary text-primaryBlack  hover:bg-primaryRed hover:text-black bg-primaryRed text-lg px-8 py-6"
+                className="border-2 border-primary text-primaryBlack  text-bold hover:bg-primaryBlue hover:text-black bg-primaryBlue text-lg px-8 py-6"
                 asChild
               >
-                <a href="tel:8037697747" className="flex items-center text-black">
+                <a href="tel:8037697747" className="flex items-center text-bold text-black">
                   <Phone className="w-5 h-5 mr-2" />
                   Call (803) 769-7747
                 </a>
